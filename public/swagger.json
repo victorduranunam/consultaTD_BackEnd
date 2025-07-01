@@ -1,0 +1,113 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API EDUCAFI",
+        "description": "Documentación de  APIEDUCAFI",
+        "contact": {
+            "email": "soporte@educafi.mx"
+        },
+        "version": "1.0"
+    },
+    "paths": {
+        "/api/alumnos": {
+            "get": {
+                "tags": [
+                    "Alumnos"
+                ],
+                "summary": "Listar todos los alumnos",
+                "operationId": "52ca0d8dad6b04f9c7e3f43eca221f9d",
+                "responses": {
+                    "200": {
+                        "description": "Lista de alumnos"
+                    }
+                }
+            }
+        },
+        "/api/alumnos/{numero_cuenta}": {
+            "get": {
+                "tags": [
+                    "Alumnos"
+                ],
+                "summary": "Mostrar un alumno por número de cuenta",
+                "operationId": "95a4765efe8b593bae6642417d82a646",
+                "parameters": [
+                    {
+                        "name": "numero_cuenta",
+                        "in": "path",
+                        "description": "Número de cuenta del alumno",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Datos del alumno"
+                    },
+                    "404": {
+                        "description": "Alumno no encontrado"
+                    }
+                }
+            }
+        },
+        "/api/alumnos/buscar": {
+            "post": {
+                "tags": [
+                    "Alumnos"
+                ],
+                "summary": "Buscar alumnos por criterios",
+                "operationId": "8efbea37da112d6fc03160a506ffdf09",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string",
+                                        "example": "Juan"
+                                    },
+                                    "apellido_paterno": {
+                                        "type": "string",
+                                        "example": "Pérez"
+                                    },
+                                    "apellido_materno": {
+                                        "type": "string",
+                                        "example": "García"
+                                    },
+                                    "correo_personal": {
+                                        "type": "string",
+                                        "example": "juan@mail.com"
+                                    },
+                                    "numero_cuenta": {
+                                        "type": "string",
+                                        "example": "12345678"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Resultados de la búsqueda"
+                    },
+                    "400": {
+                        "description": "Debe enviar al menos un campo para buscar"
+                    },
+                    "500": {
+                        "description": "Error al ejecutar la consulta"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Alumnos",
+            "description": "Operaciones relacionadas con alumnos"
+        }
+    ]
+}

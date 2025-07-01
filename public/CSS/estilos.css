@@ -1,0 +1,123 @@
+/* Layout base para que el pie de página se quede abajo si hay poco contenido */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+  }
+  
+  /* ---------- Estilos del encabezado ---------- */
+  .encabezado {
+    position: relative;
+    background-image: url('../IMG/banner_api_td.jpg');
+    background-size: contain;       /* Muestra la imagen completa */
+    background-repeat: no-repeat;   /* No repite la imagen */
+    background-position: center;    /* La centra */
+    height: 150px;                  /* Ajusta la altura si es necesario */
+    background-color: #06283f;
+    width: 100%;
+    min-height: 150px;
+    height: 20vh;
+  }
+  
+
+  .botones-header {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    display: flex;
+    flex-direction: row;  /* Esto es clave */
+    gap: 10px;
+    z-index: 10; /* Por si hay alguna imagen u overlay encima */
+  }
+  
+  .botones-header form {
+    margin: 0;  /* Elimina márgenes colapsados */
+  }
+  
+  
+  
+  /* ---------- Estilos del contenido principal ---------- */
+  main, .contenido {
+    flex: 1 0 auto; /* hace que el contenido crezca */
+    width: 90%;
+    max-width: 1500px;
+    margin: 2rem auto;
+    padding: 1rem;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.1);
+  }
+  
+  /* ---------- Estilos del pie de página ---------- */
+  .pie {
+    background-color: #000;
+    color: white;
+    text-align: center;
+    padding: 1rem 0;
+    flex-shrink: 0;
+  }
+  
+  /* ---------- Estilos del login ---------- */
+  .login-container {
+    max-width: 400px;
+    margin: 5rem auto;
+    padding: 2rem;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  
+  .empresa-header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  .logo {
+    width: 200px;
+    max-width: 200px;
+    height: auto;
+    margin-bottom: 10px;
+  }
+  
+
+
+ /* ---------- Estilos de los botones ---------- */
+  button {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+button:hover {
+    background-color: #0056b3;
+}
+
+
+
+
+ /* ---------- alerta ---------- */
+.alert {
+    padding: 12px;
+    margin-top: 10px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    font-weight: bold;
+}
+.alert-error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border-color: #f5c6cb;
+}
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border-color: #c3e6cb;
+}
+

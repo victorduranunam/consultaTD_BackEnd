@@ -1,0 +1,770 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API EDUCAFI",
+        "description": "Documentación de la API EDUCAFI",
+        "contact": {
+            "email": "soporte@educafi.mx"
+        },
+        "version": "1.0"
+    },
+    "paths": {
+        "/api/alumnos": {
+            "get": {
+                "tags": [
+                    "Alumnos"
+                ],
+                "summary": "Listar todos los alumnos",
+                "operationId": "52ca0d8dad6b04f9c7e3f43eca221f9d",
+                "responses": {
+                    "200": {
+                        "description": "Lista de alumnos"
+                    }
+                }
+            }
+        },
+        "/api/alumnos/{numero_cuenta}": {
+            "get": {
+                "tags": [
+                    "Alumnos"
+                ],
+                "summary": "Mostrar un alumno por número de cuenta",
+                "operationId": "95a4765efe8b593bae6642417d82a646",
+                "parameters": [
+                    {
+                        "name": "numero_cuenta",
+                        "in": "path",
+                        "description": "Número de cuenta del alumno",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Datos del alumno"
+                    },
+                    "404": {
+                        "description": "Alumno no encontrado"
+                    }
+                }
+            }
+        },
+        "/api/alumnos/buscar": {
+            "post": {
+                "tags": [
+                    "Alumnos"
+                ],
+                "summary": "Buscar alumnos por criterios",
+                "operationId": "8efbea37da112d6fc03160a506ffdf09",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string",
+                                        "example": "Juan"
+                                    },
+                                    "apellido_paterno": {
+                                        "type": "string",
+                                        "example": "Pérez"
+                                    },
+                                    "apellido_materno": {
+                                        "type": "string",
+                                        "example": "García"
+                                    },
+                                    "correo_personal": {
+                                        "type": "string",
+                                        "example": "juan@mail.com"
+                                    },
+                                    "numero_cuenta": {
+                                        "type": "string",
+                                        "example": "12345678"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Resultados de la búsqueda"
+                    },
+                    "400": {
+                        "description": "Debe enviar al menos un campo para buscar"
+                    },
+                    "500": {
+                        "description": "Error al ejecutar la consulta"
+                    }
+                }
+            }
+        },
+        "/APIeducafi/api/CrearToken/store": {
+            "post": {
+                "tags": [
+                    "Crear Token"
+                ],
+                "summary": "Generar nuevo token de desarrollador",
+                "description": "Crea una nueva API key asociada a un nombre proporcionado.",
+                "operationId": "2bf5334e8567e55ec4259273b71deea7",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Juan Pérez"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Token generado exitosamente",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "apiKey": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "Juan Pérez"
+                                                },
+                                                "api_key": {
+                                                    "type": "string",
+                                                    "example": "f3h4g...1234"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Error de validación"
+                    }
+                }
+            }
+        },
+        "/APIeducafi/api/CrearUsuario/store": {
+            "post": {
+                "tags": [
+                    "Crear Usuario"
+                ],
+                "summary": "Crear un nuevo usuario",
+                "description": "Registra un nuevo usuario con nombre, usuario, email y contraseña en la base de datos.",
+                "operationId": "3f8738086b0521ee7f55c94605e39eb8",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "username",
+                                    "name",
+                                    "email",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "username": {
+                                        "type": "string",
+                                        "example": "dev123"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Juan Pérez"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "juan@example.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password",
+                                        "example": "secreto123"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "302": {
+                        "description": "Usuario creado exitosamente y redireccionado"
+                    },
+                    "422": {
+                        "description": "Error de validación"
+                    }
+                }
+            }
+        },
+        "/APIeducafi/api/prebecarios/buscar": {
+            "post": {
+                "tags": [
+                    "Prebecarios"
+                ],
+                "summary": "Buscar candidatos a prebecarios",
+                "operationId": "125e9b63b01131806422a20f895cc3d6",
+                "requestBody": {
+                    "description": "Filtros opcionales para buscar candidatos a prebecarios",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "avance_min": {
+                                        "description": "Porcentaje mínimo de avance",
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 50
+                                    },
+                                    "avance_max": {
+                                        "description": "Porcentaje máximo de avance",
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 100
+                                    },
+                                    "carrera": {
+                                        "description": "Nombre de la carrera",
+                                        "type": "string",
+                                        "example": "Ingeniería en Computación"
+                                    },
+                                    "promedio_min": {
+                                        "description": "Promedio mínimo",
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 8
+                                    },
+                                    "promedio_max": {
+                                        "description": "Promedio máximo",
+                                        "type": "number",
+                                        "format": "float",
+                                        "example": 10
+                                    },
+                                    "semestre_ingreso": {
+                                        "description": "Semestre de ingreso (formato: AAAA-N)",
+                                        "type": "string",
+                                        "example": "2023-2"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Lista de candidatos encontrados",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "example": {
+                                            "nombre": "Ana Torres López",
+                                            "carrera": "Ingeniería en Computación",
+                                            "promedio": 9.2,
+                                            "avance": 75,
+                                            "semestre_ingreso": "2022-1"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/APIeducafi/api/profesores/": {
+            "get": {
+                "tags": [
+                    "Profesores"
+                ],
+                "summary": "Obtener todos los profesores",
+                "operationId": "e3a0908fb23cd0539ebc35ce825c0c05",
+                "responses": {
+                    "200": {
+                        "description": "Lista de profesores",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "num_trabajador": {
+                                                "type": "string",
+                                                "example": "T1234"
+                                            },
+                                            "nombre": {
+                                                "type": "string",
+                                                "example": "María"
+                                            },
+                                            "ape_paterno": {
+                                                "type": "string",
+                                                "example": "López"
+                                            },
+                                            "correo_personal": {
+                                                "type": "string",
+                                                "example": "maria@mail.com"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/APIeducafi/api/profesores/{num_trabajador}": {
+            "get": {
+                "tags": [
+                    "Profesores"
+                ],
+                "summary": "Obtener un profesor por número de trabajador",
+                "operationId": "aa7dbe2f44fad053515fe2802e77e285",
+                "parameters": [
+                    {
+                        "name": "num_trabajador",
+                        "in": "path",
+                        "description": "Número de trabajador del profesor",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Datos del profesor",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "num_trabajador": {
+                                            "type": "string",
+                                            "example": "T1234"
+                                        },
+                                        "nombre": {
+                                            "type": "string",
+                                            "example": "María"
+                                        },
+                                        "ape_paterno": {
+                                            "type": "string",
+                                            "example": "López"
+                                        },
+                                        "correo_personal": {
+                                            "type": "string",
+                                            "example": "maria@mail.com"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/APIeducafi/api/profesores/buscar": {
+            "post": {
+                "tags": [
+                    "Profesores"
+                ],
+                "summary": "Buscar profesores por criterios",
+                "operationId": "1caeb483af0328e56cc0eb6d1ebb9287",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string",
+                                        "example": "María"
+                                    },
+                                    "ape_paterno": {
+                                        "type": "string",
+                                        "example": "López"
+                                    },
+                                    "ape_materno": {
+                                        "type": "string",
+                                        "example": "Hernández"
+                                    },
+                                    "correo_personal": {
+                                        "type": "string",
+                                        "example": "maria@mail.com"
+                                    },
+                                    "num_trabajador": {
+                                        "type": "string",
+                                        "example": "T1234"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Resultados de la búsqueda"
+                    },
+                    "400": {
+                        "description": "Debe enviar al menos un campo para buscar"
+                    },
+                    "500": {
+                        "description": "Error al ejecutar la consulta"
+                    }
+                }
+            }
+        },
+        "/APIeducafi/api/profesores/buscar_grupos/{rfc}": {
+            "get": {
+                "tags": [
+                    "Profesores"
+                ],
+                "summary": "Buscar grupos del profesor por RFC",
+                "operationId": "7b66cac6356a70c96ff96b0dfc026602",
+                "parameters": [
+                    {
+                        "name": "rfc",
+                        "in": "path",
+                        "description": "RFC del profesor",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "GOML800101ABC"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lista de grupos del profesor",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "example": {
+                                            "clave_grupo": "GPO01",
+                                            "clave_asignatura": "MAT101",
+                                            "nombre_asignatura": "Matemáticas I",
+                                            "numero_grupo": "1"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Profesor no encontrado o sin grupos"
+                    }
+                }
+            }
+        },
+        "/APIeducafi/api/profesores/obtenerGrupoPorAsignaturaYNumero": {
+            "post": {
+                "tags": [
+                    "Profesores"
+                ],
+                "summary": "Obtener grupo por clave de asignatura y número de grupo",
+                "operationId": "9da87fa3958107c231acd7fbd1c95fa0",
+                "requestBody": {
+                    "description": "Datos necesarios para buscar el grupo",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "clave_asignatura",
+                                    "numero_grupo"
+                                ],
+                                "properties": {
+                                    "clave_asignatura": {
+                                        "type": "string",
+                                        "example": "MAT101"
+                                    },
+                                    "numero_grupo": {
+                                        "type": "string",
+                                        "example": "02"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Información del grupo",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                },
+                                "example": {
+                                    "clave_asignatura": "MAT101",
+                                    "numero_grupo": "02",
+                                    "nombre_profesor": "María López",
+                                    "salon": "B203"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Faltan parámetros requeridos"
+                    }
+                }
+            }
+        },
+        "/APIeducafi/api/profesores/mostrar_nombre/{rfc}": {
+            "get": {
+                "tags": [
+                    "Profesores"
+                ],
+                "summary": "Obtener el nombre de un profesor por su RFC",
+                "operationId": "689414de927cdc09059dba7633c785d6",
+                "parameters": [
+                    {
+                        "name": "rfc",
+                        "in": "path",
+                        "description": "RFC del profesor",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "GOML800101A12"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Nombre del profesor",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "example": {
+                                            "nombre": "Luis Gómez Martínez"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "RFC inválido o no proporcionado"
+                    }
+                }
+            }
+        },
+        "/APIeducafi/api/profesores/alumnos_grupo": {
+            "post": {
+                "tags": [
+                    "Profesores"
+                ],
+                "summary": "Obtener alumnos por clave de asignatura y número de grupo",
+                "operationId": "b5415ac60e741bd2b837bf1b14002f19",
+                "requestBody": {
+                    "description": "Datos para identificar el grupo",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "clave_asignatura",
+                                    "numero_grupo"
+                                ],
+                                "properties": {
+                                    "clave_asignatura": {
+                                        "type": "string",
+                                        "example": "MAT101"
+                                    },
+                                    "numero_grupo": {
+                                        "type": "string",
+                                        "example": "02"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Lista de alumnos",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "example": {
+                                            "matricula": "202045678",
+                                            "nombre_completo": "Juan Pérez Rodríguez"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Faltan parámetros requeridos"
+                    }
+                }
+            }
+        },
+        "/APIeducafi/api/validar/buscar": {
+            "post": {
+                "tags": [
+                    "Validar"
+                ],
+                "summary": "Buscar alumnos y profesores por criterios",
+                "operationId": "941c223c3e56a7cc953206aefc050445",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nombre": {
+                                        "type": "string",
+                                        "example": "Juan"
+                                    },
+                                    "apellido_paterno": {
+                                        "type": "string",
+                                        "example": "Pérez"
+                                    },
+                                    "apellido_materno": {
+                                        "type": "string",
+                                        "example": "García"
+                                    },
+                                    "correo_personal": {
+                                        "type": "string",
+                                        "example": "juan@mail.com"
+                                    },
+                                    "identificador": {
+                                        "type": "string",
+                                        "example": "12345678"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Resultados de la búsqueda"
+                    },
+                    "400": {
+                        "description": "Debe enviar al menos un campo para buscar"
+                    },
+                    "500": {
+                        "description": "Error al ejecutar la consulta"
+                    }
+                }
+            }
+        },
+        "/APIeducafi/api/validar/verdatos": {
+            "get": {
+                "tags": [
+                    "Validar"
+                ],
+                "summary": "Obtiene los datos validados de un usuario",
+                "operationId": "67d34598e151353d3b1c1616e1934e7c",
+                "parameters": [
+                    {
+                        "name": "identificador",
+                        "in": "query",
+                        "description": "Datos del profesor o Alumno validados",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "tipo_usuario",
+                        "in": "query",
+                        "description": "Tipo de usuario: Profesor o Alumno",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "Profesor",
+                                "Alumno"
+                            ]
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Datos del usuario"
+                    },
+                    "400": {
+                        "description": "Parámetros faltantes o inválidos"
+                    },
+                    "500": {
+                        "description": "Error al ejecutar la función"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Alumnos",
+            "description": "Operaciones relacionadas con alumnos"
+        },
+        {
+            "name": "Prebecarios",
+            "description": "Operaciones relacionadas con prebecarios"
+        },
+        {
+            "name": "Profesores",
+            "description": "Operaciones relacionadas con profesores"
+        },
+        {
+            "name": "Validar",
+            "description": "Operaciones para validar alumnos y profesores"
+        },
+        {
+            "name": "Crear Token",
+            "description": "Crear Token"
+        },
+        {
+            "name": "Crear Usuario",
+            "description": "Crear Usuario"
+        }
+    ]
+}
